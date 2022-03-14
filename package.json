@@ -19,5 +19,9 @@
   "homepage": "https://github.com/mymactive/my-articles#readme",
   "dependencies": {
     "zenn-cli": "^0.1.106"
+  },
+  "devDependencies": {
+    "textlint": "^12.1.1",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0"
   }
 }
