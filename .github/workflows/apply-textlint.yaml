@@ -12,9 +12,7 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm ci
-      - name: Apply textlint --fix
       - run: npx textlint --fix articles/**/*.md
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3
