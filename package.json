@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mymactive/my-articles#readme",
   "dependencies": {
-    "zenn-cli": "^0.1.107"
+    "zenn-cli": "^0.1.114"
   },
   "devDependencies": {
     "textlint": "^12.1.1",
