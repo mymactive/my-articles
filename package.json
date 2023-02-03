@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/mymactive/my-articles#readme",
   "dependencies": {
-    "zenn-cli": "^0.1.133"
+    "zenn-cli": "^0.1.137"
   },
   "devDependencies": {
-    "textlint": "^12.1.1",
-    "textlint-rule-preset-jtf-style": "^2.3.12"
+    "textlint": "^13.1.3",
+    "textlint-rule-preset-jtf-style": "^2.3.13"
   }
 }
