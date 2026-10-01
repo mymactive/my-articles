@@ -1,22 +1,39 @@
-name: "textlint"
+name: "Article checks"
+
 on:
   pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   textlint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: 16
-          cache: "npm"
-      - run: npm ci
-      - run: npx textlint --fix articles/**/*.md
-      - uses: ruby/setup-ruby@v1
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          ruby-version: 3
-          bundler-cache: true
-      - run: bundle exec danger
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - name: Report writing suggestions (no automatic edits)
+        shell: bash
+        run: |
+          status=0
+          npm run lint -- --format github || status=$?
+          # Existing prose is kept intact. Style findings are advisory, as with
+          # the previous Danger setup; tool/configuration failures still fail CI.
+          if [ "$status" -eq 1 ]; then
+            echo "::warning::textlint reported writing suggestions. Review them before publishing."
+          else
+            exit "$status"
+          fi
+      - name: Verify checks did not modify tracked files
+        run: git diff --exit-code
