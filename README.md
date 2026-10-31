@@ -71,5 +71,10 @@ Ruby、Bundler、Danger のセットアップは不要です。
 `package-lock.json` を含めて更新し、`npm ci --ignore-scripts`、`npm test`、`npm run lint`、ブラウザでのプレビューを確認します。
 依存関係は検証したバージョンを固定しています。Zenn CLI はマイナーバージョンでも互換性が変わる場合があるため、更新後の確認が必要です。
 
+textlint 15.8.0 が指定する glob 13 系には、[キャンセル後も探索を続ける問題](https://github.com/advisories/GHSA-3g3m-2fjr-6pw4)と、推移依存 minimatch の[パターン処理によるリソース消費問題](https://github.com/advisories/GHSA-g3hv-75wg-m249)が残っています。
+このため `package.json` の `overrides` で、textlint 配下の glob だけを修正版の 14.0.3 に固定しています。
+上流の textlint が glob 14.0.2 以上・minimatch 11.0.1 以上を解決できるようになったら、この override を外して lockfile を更新します。
+変更時は `npm audit` と既存テストに加え、全記事・本の lint 対象と指摘内容が意図せず変わらないことを確認してください。
+
 - [Zenn CLI の使い方](https://zenn.dev/zenn/articles/zenn-cli-guide)
 - [Zenn と GitHub の連携](https://zenn.dev/zenn/articles/connect-to-github)
