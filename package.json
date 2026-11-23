@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/mymactive/my-articles#readme",
   "dependencies": {
-    "zenn-cli": "0.5.4"
+    "zenn-cli": "0.5.15"
   },
   "devDependencies": {
     "textlint": "15.8.0",
-    "textlint-rule-preset-jtf-style": "3.0.3"
+    "textlint-rule-preset-jtf-style": "3.1.0"
   },
   "private": true,
   "engines": {
